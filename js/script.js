@@ -1,69 +1,90 @@
-let count = 0;
-let timeLeft = 30;
-let gameActive = true;
-
-const button = document.getElementById("counter");
-const reloadButton = document.getElementById("reloadButton");
-
-// Создаем элемент для вывода результата
-const resultText = document.createElement("div");
-resultText.style.position = "absolute";
-resultText.style.top = "50%";
-resultText.style.left = "50%";
-resultText.style.transform = "translate(-50%, -50%)";
-resultText.style.fontSize = "32px";
-resultText.style.fontWeight = "bold";
-resultText.style.color = "white";
-resultText.style.textAlign = "center";
-document.body.appendChild(resultText);
-
-// Функция обработки клика/касания
-function handleClick() {
-    if (!gameActive) return;
-
-    count++;
-    button.textContent = count;
-
-    const clickSound = new Audio("sound/click.mp3");
-    clickSound.play();
-
-    // Перемещение кнопки
-    var windowWidth = window.innerWidth;
-    var windowHeight = window.innerHeight;
-    var buttonWidth = button.offsetWidth;
-    var buttonHeight = button.offsetHeight;
-
-    var randomX = Math.floor(Math.random() * (windowWidth - buttonWidth));
-    var randomY = Math.floor(Math.random() * (windowHeight - buttonHeight));
-
-    button.style.left = randomX + "px";
-    button.style.top = randomY + "px";
+html {
+    background-image: url("../img/background.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    overflow: hidden;
+    cursor: url("../img/cur.png") 16 16, auto;
 }
 
-// Поддержка кликов и касаний
-button.addEventListener("click", handleClick);
-button.addEventListener("touchstart", handleClick); // Поддержка для тач-устройств
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    cursor: url("../img/cur.png") 16 16, auto;
+}
 
-// Таймер обратного отсчета
-const timerInterval = setInterval(() => {
-    timeLeft--;
+button {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    font-size: 64px;
+    font-weight: bold;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: lightgray;
+    transition: transform 0.2s ease-in-out;
+    cursor: url("../img/cur.png") 16 16, auto;
+    background: radial-gradient(circle, white 10%, #cd01cd 100%);
+}
 
-    if (timeLeft <= 0) {
-        clearInterval(timerInterval);
-        gameActive = false;
+button:hover {
+    transform: scale(1.1);
+}
 
-        button.style.display = "none";
-        resultText.textContent = `⏳ Время вышло! Вы наклацали: ${count} очков! 🎉`;
-        reloadButton.style.display = "block";
+#reloadButton {
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: lightgray;
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+    z-index: 1000;
+    display: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* 📱 Адаптация для мобильных устройств */
+@media (max-width: 768px) {
+    button {
+        width: 80px; /* Уменьшаем размер кнопки */
+        height: 80px;
+        font-size: 48px;
     }
-}, 1000);
 
-// Кнопка перезапуска
-reloadButton.addEventListener("click", function () {
-    location.reload();
-});
-reloadButton.addEventListener("touchstart", function () {
-    location.reload();
-});
+    #reloadButton {
+        top: 5px;
+        right: 10px;
+        font-size: 14px;
+        padding: 8px 16px;
+    }
 
+    html {
+        background-size: contain; /* Фон лучше адаптируется к экрану */
+    }
+}
+
+@media (max-width: 480px) {
+    button {
+        width: 60px; /* Еще меньше на маленьких экранах */
+        height: 60px;
+        font-size: 36px;
+    }
+
+    #reloadButton {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    html {
+        background-size: cover;
+    }
+}
 

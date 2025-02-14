@@ -1,36 +1,69 @@
 let count = 0;
+let timeLeft = 30;
+let gameActive = true;
+
 const button = document.getElementById("counter");
+const reloadButton = document.getElementById("reloadButton");
 
-button.addEventListener("click", function() {
+// Создаем элемент для вывода результата
+const resultText = document.createElement("div");
+resultText.style.position = "absolute";
+resultText.style.top = "50%";
+resultText.style.left = "50%";
+resultText.style.transform = "translate(-50%, -50%)";
+resultText.style.fontSize = "32px";
+resultText.style.fontWeight = "bold";
+resultText.style.color = "white";
+resultText.style.textAlign = "center";
+document.body.appendChild(resultText);
+
+// Функция обработки клика/касания
+function handleClick() {
+    if (!gameActive) return;
+
     count++;
-    this.textContent = count;
+    button.textContent = count;
 
-    // Создаем новый объект Audio при каждом клике
     const clickSound = new Audio("sound/click.mp3");
     clickSound.play();
-});
 
-
-document.getElementById("counter").addEventListener("click", function() {
-    // Получаем размеры окна
+    // Перемещение кнопки
     var windowWidth = window.innerWidth;
     var windowHeight = window.innerHeight;
+    var buttonWidth = button.offsetWidth;
+    var buttonHeight = button.offsetHeight;
 
-    // Получаем размеры кнопки
-    var buttonWidth = this.offsetWidth;
-    var buttonHeight = this.offsetHeight;
+    var randomX = Math.floor(Math.random() * (windowWidth - buttonWidth));
+    var randomY = Math.floor(Math.random() * (windowHeight - buttonHeight));
 
-    // Генерируем случайные координаты для кнопки с учётом её размеров
-    var randomX = Math.floor(Math.random() * (windowWidth - buttonWidth));  // Учитываем ширину кнопки
-    var randomY = Math.floor(Math.random() * (windowHeight - buttonHeight));  // Учитываем высоту кнопки
+    button.style.left = randomX + "px";
+    button.style.top = randomY + "px";
+}
 
-    // Перемещаем кнопку
-    this.style.left = randomX + "px";
-    this.style.top = randomY + "px";
+// Поддержка кликов и касаний
+button.addEventListener("click", handleClick);
+button.addEventListener("touchstart", handleClick); // Поддержка для тач-устройств
+
+// Таймер обратного отсчета
+const timerInterval = setInterval(() => {
+    timeLeft--;
+
+    if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        gameActive = false;
+
+        button.style.display = "none";
+        resultText.textContent = `⏳ Время вышло! Вы наклацали: ${count} очков! 🎉`;
+        reloadButton.style.display = "block";
+    }
+}, 1000);
+
+// Кнопка перезапуска
+reloadButton.addEventListener("click", function () {
+    location.reload();
 });
-
-document.getElementById("reloadButton").addEventListener("click", function() {
-    location.reload(); // Перезагружает страницу
+reloadButton.addEventListener("touchstart", function () {
+    location.reload();
 });
 
 

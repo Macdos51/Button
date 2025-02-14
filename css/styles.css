@@ -1,5 +1,5 @@
 html {
-    background-image: url("main/img/background.jpg");
+    background-image: url("../img/background.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
@@ -16,7 +16,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    cursor: url('img/cur.png') 16 16, auto;
+    cursor: url("..img/cur.png") 16 16, auto;
 }
 
 button {
@@ -29,7 +29,7 @@ button {
     border-radius: 0.5cap;
     background-color: lightgray;
     transition: transform 0.2s ease-in-out;
-    cursor: url("/img/cur.png") 16 16, auto;
+    cursor: url("../img/cur.png") 16 16, auto;
     background: radial-gradient(circle, white 10%, #cd01cd 100%);
 }
 

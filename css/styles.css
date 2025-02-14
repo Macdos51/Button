@@ -8,15 +8,15 @@ html {
     -o-background-size: cover;
     background-size: cover;
     overflow: hidden;
-  }
-
+    cursor: url("../img/cur.png") 16 16, auto; /* Курсор для всего сайта */
+}
 
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    cursor: url("..img/cur.png") 16 16, auto;
+    cursor: url("../img/cur.png") 16 16, auto; /* Курсор для всего тела */
 }
 
 button {
@@ -29,7 +29,7 @@ button {
     border-radius: 0.5cap;
     background-color: lightgray;
     transition: transform 0.2s ease-in-out;
-    cursor: url("../img/cur.png") 16 16, auto;
+    cursor: url("../img/cur.png") 16 16, auto; /* Курсор для кнопки */
     background: radial-gradient(circle, white 10%, #cd01cd 100%);
 }
 
@@ -46,8 +46,7 @@ button:hover {
     height: 5px;
     background-color: lightgray;
     transition: transform 0.2s ease-in-out;
-    cursor: pointer;
+    cursor: url("../img/cur.png") 16 16, auto; /* Курсор для кнопки перезагрузки */
     z-index: 1000; /* Обеспечивает, что кнопка будет поверх других элементов */
 }
-
 

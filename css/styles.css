@@ -16,7 +16,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    cursor: url('/img/cur.png') 16 16, auto;
+    cursor: url('img/cur.png') 16 16, auto;
 }
 
 button {

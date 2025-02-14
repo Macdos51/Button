@@ -6,7 +6,7 @@ button.addEventListener("click", function() {
     this.textContent = count;
 
     // Создаем новый объект Audio при каждом клике
-    const clickSound = new Audio("/sound/click.mp3");
+    const clickSound = new Audio("sound/click.mp3");
     clickSound.play();
 });
 

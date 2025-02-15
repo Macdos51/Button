@@ -1,3 +1,7 @@
+window.onload = function () {
+    document.getElementById("reloadButton").style.display = "none";
+};
+
 let count = 0;
 let timeLeft = 30;
 let gameActive = true;
